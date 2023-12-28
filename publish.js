@@ -23,10 +23,15 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/publish", (req, res) => {
+app.get("/publish", async (req, res) => {
+  const id = Math.floor(Math.random) * 10;
+  const data = {
+    id,
+    message: `message : ${id}`,
+  };
+  await publisher.publish("message", JSON.stringify(data));
   res.send({
-    status: true,
-    message: "redis published",
+    message: "data published",
   });
 });
 
